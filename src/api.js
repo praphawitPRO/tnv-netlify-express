@@ -42,6 +42,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 router.get('/', function(req, res) {
+  try{
       
   dbConn.query(sql,function(err,rows)     {
 
@@ -50,7 +51,7 @@ router.get('/', function(req, res) {
     
       // } else {
        
-        try{
+        
           let body = {
               "records": []
           };
@@ -73,13 +74,16 @@ router.get('/', function(req, res) {
           axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${API_KEY_AB}`, "Content-Type" : "application/json"} })
                   .then(data => res.json({"status" : "success"}))
                   .catch(err => res.json({"error" : err}));
-        }
-        catch(err){
-            console.error("GG", err);
-        }
+       
      
       // }
   });
+
+  }
+  catch(err){
+      console.error("GG", err);
+      res.json({"error" : err});
+  }
 });
 
 app.use('/.netlify/functions/api', router);
