@@ -58,22 +58,25 @@ router.get('/', function(req, res) {
 
           let records = [];
 
-          rows.forEach(element => {
-            const field = {
-              "fields": {
-                "ref": element.ref,
-                "total": String(element.total)
-              }
-            };
-            records.push(field);
+          // rows.forEach(element => {
+          //   const field = {
+          //     "fields": {
+          //       "ref": element.ref,
+          //       "total": String(element.total)
+          //     }
+          //   };
+          //   records.push(field);
             
-          });
+          // });
 
           body.records = records ;
 
-          axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${API_KEY_AB}`, "Content-Type" : "application/json"} })
-                  .then(data => res.json({"status" : "success"}))
-                  .catch(err => res.json({"error" : err}));
+          res.json(rows);
+
+
+          // axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${API_KEY_AB}`, "Content-Type" : "application/json"} })
+          //         .then(data => res.json({"status" : "success"}))
+          //         .catch(err => res.json({"error" : err}));
        
      
       // }
