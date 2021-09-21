@@ -41,7 +41,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
       
   dbConn.query(sql,function(err,rows)     {
 
@@ -71,8 +71,8 @@ router.get('/', function(req, res, next) {
           body.records = records ;
 
           axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${API_KEY_AB}`, "Content-Type" : "application/json"} })
-                  .then(data => res.status(200).send("success"))
-                  .catch(err => res.send(err));
+                  .then(data => res.json({"status" : "success"}))
+                  .catch(err => res.json({"error" : err}));
         }
         catch(err){
             console.error("GG", err);
