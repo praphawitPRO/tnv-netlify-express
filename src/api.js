@@ -45,10 +45,10 @@ router.get('/', function(req, res) {
       
   dbConn.query(sql,function(err,rows)     {
 
-      if(err) {
-        res.send(err);
+      // if(err) {
+      //   res.send(err);
     
-      } else {
+      // } else {
        
         try{
           let body = {
@@ -78,7 +78,7 @@ router.get('/', function(req, res) {
             console.error("GG", err);
         }
      
-      }
+      // }
   });
 });
 
