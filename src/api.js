@@ -45,7 +45,7 @@ router.get('/', function(req, res) {
   try{
 
     const rows = {
-      port :  process.env.PORT || 8080
+      port :  process.env.DATA
     }
 
     res.send(rows);
