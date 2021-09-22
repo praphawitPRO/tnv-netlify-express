@@ -13,7 +13,8 @@ const connection = mysql.createConnection({
 	host:'tnv-db.czkq9l6gxyfz.ap-southeast-1.rds.amazonaws.com',
 	user:'tnv-readonly',
 	password:'F*XsVY7Tgxb6ZX^XR0',
-	database:'tnv'
+	database:'tnv',
+  port: 9000
 });
 
 connection.connect(function(error){
