@@ -4,7 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-// const dbConn  = require('../lib/db');
+const dbConn  = require('../lib/db');
 // const axios = require("axios");
 const router = express.Router();
 
@@ -44,25 +44,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 router.get('/', function(req, res) {
   try{
 
-    const rows = {
-      port :  process.env.DATA
-    }
+    // const rows = {
+    //   port :  process.env.DATA
+    // }
 
-    res.send(rows);
+    // res.send(rows);
       
-  // dbConn.query(sql,function(err,rows)     {
+  dbConn.query(sql,function(err,rows)     {
 
-  //     if(err) {
-  //       res.send(err);
+      if(err) {
+        res.send(err);
     
-  //     } else {
+      } else {
        
         
-  //         let body = {
-  //             "records": []
-  //         };
+          let body = {
+              "records": []
+          };
 
-  //         let records = [];
+          // let records = [];
 
           // rows.forEach(element => {
           //   const field = {
@@ -78,15 +78,15 @@ router.get('/', function(req, res) {
           // body.records = records ;
 
           // res.send(body);
-          // res.send(rows);
+          res.send(rows);
 
           // axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${API_KEY_AB}`, "Content-Type" : "application/json"} })
           //         .then(data => res.json({"status" : "success"}))
           //         .catch(err => res.json({"error" : err}));
        
      
-  //     }
-  // });
+      }
+  });
 
   }
   catch(err){
