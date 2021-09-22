@@ -105,9 +105,6 @@ router.get('/', function(req, res) {
       }
   });
 
-  
-  connection.end();
-
   }
   catch(err){
       console.error("GG", err);
