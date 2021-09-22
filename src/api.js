@@ -10,11 +10,10 @@ const router = express.Router();
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-	host:'tnv-db.czkq9l6gxyfz.ap-southeast-1.rds.amazonaws.com',
-	user:'tnv-readonly',
-	password:'F*XsVY7Tgxb6ZX^XR0',
-	database:'tnv',
-  port: 9000
+	host:'103.27.203.110',
+	user:'nvNotifyService_1623050429',
+	password:'vJ2r17xXFSimNjnCwfnbpqkK80P07oAvFDSQC1clAFE0y2MvSUNWa',
+	database:'nvNotifyService_1623050429',
 });
 
 connection.connect(function(error){
@@ -24,6 +23,8 @@ connection.connect(function(error){
 		console.log('Connected..!');
 	}
 });
+
+const sqltest = `SELECT * FROM wp_users`;
 
 
 const sql = `SELECT tnv_credtns.ref,
@@ -61,51 +62,51 @@ app.use(express.static(path.join(__dirname, 'public')));
 router.get('/', function(req, res) {
   try{
 
-    const rows = {
-      port :  process.env.DATA
-    }
+    // const rows = {
+    //   port :  process.env.DATA
+    // }
 
-    res.send(rows);
+    // res.send(rows);
       
-  // connection.query(sql,function(err,rows)     {
+  connection.query(sqltest,function(err,rows)     {
 
-  //     if(err) {
-  //       res.send(err);
+      if(err) {
+        res.send(err);
     
-  //     } else {
+      } else {
        
         
-  //         let body = {
-  //             "records": []
-  //         };
+          let body = {
+              "records": []
+          };
 
-  //         // let records = [];
+          // let records = [];
 
-  //         // rows.forEach(element => {
-  //         //   const field = {
-  //         //     "fields": {
-  //         //       "ref": element.ref,
-  //         //       "total": String(element.total)
-  //         //     }
-  //         //   };
-  //         //   records.push(field);
+          // rows.forEach(element => {
+          //   const field = {
+          //     "fields": {
+          //       "ref": element.ref,
+          //       "total": String(element.total)
+          //     }
+          //   };
+          //   records.push(field);
             
-  //         // });
+          // });
 
-  //         // body.records = records ;
+          // body.records = records ;
 
-  //         // res.send(body);
-  //         res.send(rows);
+          // res.send(body);
+          res.send(rows);
 
-  //         // axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${process.env.API_KEY_AB}`, "Content-Type" : "application/json"} })
-  //         //         .then(data => res.json({"status" : "success"}))
-  //         //         .catch(err => res.json({"error" : err})); 
+          // axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${process.env.API_KEY_AB}`, "Content-Type" : "application/json"} })
+          //         .then(data => res.json({"status" : "success"}))
+          //         .catch(err => res.json({"error" : err})); 
      
-  //     }
-  // });
+      }
+  });
 
   
-  // connection.end();
+  connection.end();
 
   }
   catch(err){
