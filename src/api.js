@@ -3,7 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const router = express.Router();
-// const dbConn  = require('../lib/db');
+const dbConn  = require('../lib/db');
 
 // const axios = require("axios");
 
@@ -68,7 +68,7 @@ router.get('/', function(req, res) {
 
     // res.send(rows);
       
-  connection.query(sqltest,function(err,rows)     {
+    dbConn.query(sql,function(err,rows)     {
 
       if(err) {
         res.send(err);
