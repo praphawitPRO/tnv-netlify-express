@@ -1,4 +1,3 @@
-const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -27,7 +26,6 @@ const sql = `SELECT tnv_credtns.ref,
               )
               GROUP BY tnv_credtns.ref` ;
 
-const API_KEY_AB = `keyvurKrsuEF7eBrs`;
 
 var app = express();
 
@@ -80,10 +78,9 @@ router.get('/', function(req, res) {
           // res.send(body);
           res.send(rows);
 
-          // axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${API_KEY_AB}`, "Content-Type" : "application/json"} })
+          // axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${process.env.API_KEY_AB}`, "Content-Type" : "application/json"} })
           //         .then(data => res.json({"status" : "success"}))
-          //         .catch(err => res.json({"error" : err}));
-       
+          //         .catch(err => res.json({"error" : err})); 
      
       }
   });
@@ -100,3 +97,5 @@ app.use('/', router);
 app.set('port', process.env.PORT || 8080);
 
 app.listen(app.get('port'));
+
+module.exports = app;
