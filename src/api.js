@@ -45,7 +45,7 @@ const sql = `SELECT tnv_credtns.ref,
               GROUP BY tnv_credtns.ref` ;
 
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -60,48 +60,51 @@ app.use(express.static(path.join(__dirname, 'public')));
 router.get('/', function(req, res) {
   try{
 
-    // const rows = {
-    //   port :  process.env.DATA
-    // }
+    const rows = {
+      port :  process.env.DATA
+    }
 
-    // res.send(rows);
+    res.send(rows);
       
-  connection.query(sql,function(err,rows)     {
+  // connection.query(sql,function(err,rows)     {
 
-      if(err) {
-        res.send(err);
+  //     if(err) {
+  //       res.send(err);
     
-      } else {
+  //     } else {
        
         
-          let body = {
-              "records": []
-          };
+  //         let body = {
+  //             "records": []
+  //         };
 
-          // let records = [];
+  //         // let records = [];
 
-          // rows.forEach(element => {
-          //   const field = {
-          //     "fields": {
-          //       "ref": element.ref,
-          //       "total": String(element.total)
-          //     }
-          //   };
-          //   records.push(field);
+  //         // rows.forEach(element => {
+  //         //   const field = {
+  //         //     "fields": {
+  //         //       "ref": element.ref,
+  //         //       "total": String(element.total)
+  //         //     }
+  //         //   };
+  //         //   records.push(field);
             
-          // });
+  //         // });
 
-          // body.records = records ;
+  //         // body.records = records ;
 
-          // res.send(body);
-          res.send(rows);
+  //         // res.send(body);
+  //         res.send(rows);
 
-          // axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${process.env.API_KEY_AB}`, "Content-Type" : "application/json"} })
-          //         .then(data => res.json({"status" : "success"}))
-          //         .catch(err => res.json({"error" : err})); 
+  //         // axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${process.env.API_KEY_AB}`, "Content-Type" : "application/json"} })
+  //         //         .then(data => res.json({"status" : "success"}))
+  //         //         .catch(err => res.json({"error" : err})); 
      
-      }
-  });
+  //     }
+  // });
+
+  
+  // connection.end();
 
   }
   catch(err){
