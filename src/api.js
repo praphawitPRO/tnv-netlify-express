@@ -2,10 +2,28 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
-const dbConn  = require('../lib/db');
-// const axios = require("axios");
 const router = express.Router();
+// const dbConn  = require('../lib/db');
+
+// const axios = require("axios");
+
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+	host:'tnv-db.czkq9l6gxyfz.ap-southeast-1.rds.amazonaws.com',
+	user:'tnv-readonly',
+	password:'F*XsVY7Tgxb6ZX^XR0',
+	database:'tnv'
+});
+
+connection.connect(function(error){
+	if(!!error) {
+		console.log(error);
+	} else {
+		console.log('Connected..!');
+	}
+});
+
 
 const sql = `SELECT tnv_credtns.ref,
               sum(tnv_credtns.creds) as total
@@ -48,7 +66,7 @@ router.get('/', function(req, res) {
 
     // res.send(rows);
       
-  dbConn.query(sql,function(err,rows)     {
+  connection.query(sql,function(err,rows)     {
 
       if(err) {
         res.send(err);
