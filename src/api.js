@@ -3,9 +3,9 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const serverless = require("serverless-http");
-const dbConn  = require('../lib/db');
-const axios = require("axios");
+
+// const dbConn  = require('../lib/db');
+// const axios = require("axios");
 const router = express.Router();
 
 const sql = `SELECT tnv_credtns.ref,
@@ -43,20 +43,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 router.get('/', function(req, res) {
   try{
-      
-  dbConn.query(sql,function(err,rows)     {
 
-      // if(err) {
-      //   res.send(err);
+    const rows = {
+      port :  process.env.PORT || 8080
+    }
+
+    res.send(rows);
+      
+  // dbConn.query(sql,function(err,rows)     {
+
+  //     if(err) {
+  //       res.send(err);
     
-      // } else {
+  //     } else {
        
         
-          let body = {
-              "records": []
-          };
+  //         let body = {
+  //             "records": []
+  //         };
 
-          let records = [];
+  //         let records = [];
 
           // rows.forEach(element => {
           //   const field = {
@@ -69,18 +75,18 @@ router.get('/', function(req, res) {
             
           // });
 
-          body.records = records ;
+          // body.records = records ;
 
-          res.send(rows);
-
+          // res.send(body);
+          // res.send(rows);
 
           // axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${API_KEY_AB}`, "Content-Type" : "application/json"} })
           //         .then(data => res.json({"status" : "success"}))
           //         .catch(err => res.json({"error" : err}));
        
      
-      // }
-  });
+  //     }
+  // });
 
   }
   catch(err){
@@ -89,23 +95,8 @@ router.get('/', function(req, res) {
   }
 });
 
-app.use('/.netlify/functions/api', router);
+app.use('/', router);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+app.set('port', process.env.PORT || 8080);
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-module.exports = app;
-module.exports.handler = serverless(app);
+app.listen(app.get('port'));

@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=development ./node_modules/.bin/netlify-lambda serve src",
-    "build": "NODE_ENV=production ./node_modules/.bin/netlify-lambda build src"
+    "start": "nodemon -r dotenv/config src/api.js dotenv_config_path=.env"
   },
   "dependencies": {
     "axios": "^0.21.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^10.0.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-flash": "^0.0.2",
@@ -18,7 +18,6 @@
     "method-override": "^3.0.0",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
-    "netlify-lambda": "^2.0.14",
-    "serverless-http": "^2.7.0"
+    "nodemon": "^2.0.12"
   }
 }
