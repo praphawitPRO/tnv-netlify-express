@@ -68,7 +68,7 @@ router.get('/', function(req, res) {
 
     // res.send(rows);
       
-    dbConn.query(sql,function(err,rows)     {
+    connection.query(sqltest,function(err,rows)     {
 
       if(err) {
         res.send(err);
@@ -80,23 +80,23 @@ router.get('/', function(req, res) {
               "records": []
           };
 
-          // let records = [];
+          let records = [];
 
-          // rows.forEach(element => {
-          //   const field = {
-          //     "fields": {
-          //       "ref": element.ref,
-          //       "total": String(element.total)
-          //     }
-          //   };
-          //   records.push(field);
+          rows.forEach(element => {
+            const field = {
+              "fields": {
+                "ref": element.user_nicename,
+                "total": String(element.ID)
+              }
+            };
+            records.push(field);
             
-          // });
+          });
 
-          // body.records = records ;
+          body.records = records ;
 
-          // res.send(body);
-          res.send(rows);
+          res.send(body);
+          // res.send(rows);
 
           // axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${process.env.API_KEY_AB}`, "Content-Type" : "application/json"} })
           //         .then(data => res.json({"status" : "success"}))
