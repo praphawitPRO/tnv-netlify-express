@@ -80,7 +80,7 @@ router.get('/', function(req, res) {
             const field = {
               "fields": {
                 "ref": element.ref,
-                "total": String(element.total)
+                "total": parseFloat(element.total)
               }
             };
             records.push(field);
@@ -88,12 +88,12 @@ router.get('/', function(req, res) {
 
           body.records = records ;
 
-          res.send(body);
+          // res.send(body);
           // res.send(rows);
 
-          // axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${process.env.API_KEY_AB}`, "Content-Type" : "application/json"} })
-          //         .then(data => res.json({"status" : "success"}))
-          //         .catch(err => res.json({"error" : err})); 
+          axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${process.env.API_KEY_AB}`, "Content-Type" : "application/json"} })
+                  .then(data => res.json({"status" : "success"}))
+                  .catch(err => res.json({"error" : err})); 
      
       }
   });
