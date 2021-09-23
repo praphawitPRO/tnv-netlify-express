@@ -7,24 +7,24 @@ const dbConn  = require('../lib/db');
 
 const axios = require("axios");
 
-const mysql = require('mysql');
+// const mysql = require('mysql');
 
-const connection = mysql.createConnection({
-	host:'103.27.203.110',
-	user:'nvNotifyService_1623050429',
-	password:'vJ2r17xXFSimNjnCwfnbpqkK80P07oAvFDSQC1clAFE0y2MvSUNWa',
-	database:'nvNotifyService_1623050429',
-});
+// const connection = mysql.createConnection({
+// 	host:'103.27.203.110',
+// 	user:'nvNotifyService_1623050429',
+// 	password:'vJ2r17xXFSimNjnCwfnbpqkK80P07oAvFDSQC1clAFE0y2MvSUNWa',
+// 	database:'nvNotifyService_1623050429',
+// });
 
-connection.connect(function(error){
-	if(!!error) {
-		console.log(error);
-	} else {
-		console.log('Connected..!');
-	}
-});
+// connection.connect(function(error){
+// 	if(!!error) {
+// 		console.log(error);
+// 	} else {
+// 		console.log('Connected..!');
+// 	}
+// });
 
-const sqltest = `SELECT * FROM wp_users`;
+// const sqltest = `SELECT * FROM wp_users`;
 
 
 const sql = `SELECT tnv_credtns.ref,
@@ -83,21 +83,17 @@ router.get('/', function(req, res) {
                 "total": String(element.total)
               }
             };
-            // if(element.ID == 1){
-              records.push(field);
-            // }
-           
-            
+            records.push(field);
           });
 
           body.records = records ;
 
-          // res.send(body);
+          res.send(body);
           // res.send(rows);
 
-          axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${process.env.API_KEY_AB}`, "Content-Type" : "application/json"} })
-                  .then(data => res.json({"status" : "success"}))
-                  .catch(err => res.json({"error" : err})); 
+          // axios.post("https://api.airtable.com/v0/appya8Wd8zuZbxvd0/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3",body,{ headers: {"Authorization" : `Bearer ${process.env.API_KEY_AB}`, "Content-Type" : "application/json"} })
+          //         .then(data => res.json({"status" : "success"}))
+          //         .catch(err => res.json({"error" : err})); 
      
       }
   });
