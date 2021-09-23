@@ -62,7 +62,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 router.get('/', function(req, res) {
   try{
       
-    connection.query(sqltest,function(err,rows)     {
+    dbConn.query(sql,function(err,rows)     {
 
       if(err) {
         res.send(err);
@@ -79,13 +79,13 @@ router.get('/', function(req, res) {
           rows.forEach(element => {
             const field = {
               "fields": {
-                "ref": element.user_nicename,
-                "total": String(element.ID)
+                "ref": element.ref,
+                "total": String(element.total)
               }
             };
-            if(element.ID == 1){
+            // if(element.ID == 1){
               records.push(field);
-            }
+            // }
            
             
           });
